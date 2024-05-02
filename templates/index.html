@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include "header.html" %}
+    <main>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Dynamically generated posts from the combined list of static and API posts -->
+                    {% for post in posts %}
+                        <div class="post-preview">
+                            <a href="{{ url_for('post', slug=post.title|slugify) }}">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                {% if post.subtitle %}
+                                    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                                {% endif %}
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#!">{{ post.author }}</a>
+                                on {{ post.date }}
+                            </p>
+                        </div>
+                        <hr class="my-4" />
+                    {% endfor %}
+                    <div class="d-flex justify-content-end mb-4">
+                        <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include "footer.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Listen for the scroll event
+      window.addEventListener('scroll', function() {
+        // Get the navbar
+        var navbar = document.getElementById('mainNav');
+        // Check if the page is scrolled more than 50 pixels
+        if(window.pageYOffset > 50) {
+          // Add 'navbar-scrolled' class to navbar
+          navbar.classList.add('navbar-scrolled');
+        } else {
+          // Remove 'navbar-scrolled' class from navbar
+          navbar.classList.remove('navbar-scrolled');
+        }
+      });
+    </script>
+</body>
+</html>
